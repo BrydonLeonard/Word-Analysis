@@ -11,7 +11,7 @@ f = open(sys.argv[1], encoding='utf-8')
 for line in f:
 	try:
 		list += (re.sub('[^A-Za-z ]+', '', re.sub('^.+(?=-)-.+(?=:): ', '', line)).replace('<Media omitted>','').replace('\n',' ')+' ')
-		listYou += re.sub('[^A-Za-z ]+', '', re.sub('(^(?!.+'+yourName+').+)|(^.+(?=-)-.+?(?=:))|(.*Media omitted.*)','', line)).replace('\n',' ')+' '
+		listYou += re.sub('(^(?!.+'+yourName+').+)|((^.+-.+?(?=:))|([^A-Za-z ]))|(.*Media omitted.*)','', line).replace('\n',' ')+' '
 	except:
 		pass
 
