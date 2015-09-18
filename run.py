@@ -11,13 +11,14 @@ f = open(sys.argv[1], encoding='utf-8')
 for line in f:
 	try:
 		list += (re.sub('[^A-Za-z ]+', '', re.sub('^.+(?=-)-.+(?=:): ', '', line)).replace('<Media omitted>','').replace('\n',' ')+' ')
-		listYou += (re.sub('[^A-Za-z ]+', '', re.sub('^.+(?=-)-.+(?=:): ', '', re.sub('^.+(?=-)-.+(?=:)(?<!'+yourName+').+', '', line))).replace('<Media omitted>','').replace('\n',' ')+' ')
+		listYou += re.sub('[^A-Za-z ]+', '', re.sub('(^(?!.+'+yourName+').+)|(^.+(?=-)-.+?(?=:))|(.*Media omitted.*)','', line)).replace('\n',' ')+' '
 	except:
 		pass
 
 
-def countingSortAndDisp(dataArr, labelArr, isBrydon):
-	if isBrydon == 1:
+
+def countingSortAndDisp(dataArr, labelArr, isYou):
+	if isYou == 1:
 		outputF = open(sys.argv[2]+'1way.csv','w')
 	else:
 		outputF = open(sys.argv[2]+'.csv', 'w')
